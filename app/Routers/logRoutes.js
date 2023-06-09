@@ -1,3 +1,5 @@
+//LogRoutes
+
 const express = require ('express');
 const LogController = require ('../Controllers/LogController')
 const router = express.Router();
