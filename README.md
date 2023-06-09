@@ -30,12 +30,12 @@ Before running the application, ensure that you have the following dependencies 
 1. Start the server:
 
    ```
-   node Server.js
+   npm run serve
    ```
 
 2. Access the API endpoints using a tool like Postman or a web browser.
 
-### User Registration
+### User Creation example
 
 - **Endpoint:** POST `/api/user`
 - **Description:** Creates a new user account.
@@ -62,7 +62,7 @@ Before running the application, ensure that you have the following dependencies 
       "lastname": "Doe",
       "email": "john.doe@example.com",
       "password": "$2a$10$TmuOZ6vugCN1rfeoZTkZ/uuBc55WkNSvMw7a0nGMNGnOV0qJyWXFm",
-      "userId": "23001",
+      "userId": "23CON001",
       "userType": "CON",
       "file": "1624314807047--profile.jpg",
       "createdAt": "2023-06-21T12:20:38.074Z",
@@ -72,36 +72,30 @@ Before running the application, ensure that you have the following dependencies 
   }
   ```
 
-### User Login
 
-- **Endpoint:** POST `/api/logIn`
-- **Description:** Logs in a user and generates an access token.
-- **Request Body:**
 
-  ```json
-  {
-    "email": "john.doe@example.com",
-    "password": "password123"
-  }
-  ```
+## API Endpoints
 
-- **Response:**
+- `POST /api/user`: Create a new user.
+- `GET /api/users`: Get all users.
+- `GET /api/user/:userId`: Get a user by ID.
+- `PUT /api/user/:userId`: Update a user.
+- `DELETE /api/user/:userId`: Delete a user.
+- `POST /api/logIn`: Log in with email and password.
+- `POST /api/logOut`: Log out.
 
-  ```
-  Logged in successfully
-  ```
+The API will be available at `http://localhost:3000/api`.
+## File Uploads
 
-### User Logout
+The API supports file uploads for user profiles. When creating or updating a user, send a multipart/form-data request with the `file` field containing the user's profile picture.
 
-- **Endpoint:** POST `/api/logOut`
-- **Description:** Logs out the current user.
-- **Response:**
+The uploaded files are stored in the `uploads` directory.
 
-  ```json
-  {
-    "message": "Logged out"
-  }
-  ```
+## Authentication
+
+User authentication is implemented using JSON Web Tokens (JWT). When logging in, the API returns an access token that should be included in subsequent requests in the `Authorization` header as follows:
+
+
 
 ## Contributing
 

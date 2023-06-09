@@ -16,7 +16,7 @@ if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory);
 }
 
-//upload image file
+//upload file file
 const storage = multer.diskStorage({
   destination: (req, file, cb) =>{
     cb(null, uploadDirectory)
@@ -29,6 +29,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post('/user',upload.single('file'), UserController.createUser); // Create user 
-
+router.get('/users',UserController.getAllUsers); // Get all users 
+router.get('/user/:userId',UserController.getUserById); // Get user by userId 
+router.put('/user/:userId',upload.single('file'),UserController.updateUser); // Update a user 
+router.delete('/user/:userId',UserController.deleteUser); // Delete a user 
 
 module.exports = router;
