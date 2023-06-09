@@ -30,7 +30,7 @@ Before running the application, ensure that you have the following dependencies 
 1. Start the server:
 
    ```
-   node Server.js
+   npm run serve
    ```
 
 2. Access the API endpoints using a tool like Postman or a web browser.
