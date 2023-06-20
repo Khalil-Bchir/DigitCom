@@ -48,7 +48,8 @@ UserController.createUser = async (req, res) => {
       password: hashedPassword,
       userId: customId,
       userType: req.body.userType,
-      file : filename
+      file : filename,
+      valid : false
     });
 
     const savedUser = await newUser.save();
@@ -165,5 +166,18 @@ UserController.deleteUser = async (req, res) => {
   }
 };
 
+//approve user
 
+UserController.approveUser = async (req,res)=>{
+try{
+    const userId = req.params.userId;
+    const user = await User.findOne({ userId: userId });
+    user.valid = true;
+    const updatedUser = await user.save();
+    res.json(updatedUser);
+  }catch(error){
+    console.log(error.message);
+    res.status(500).json( {message: error.message});
+  }
+}
 module.exports = UserController;

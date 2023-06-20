@@ -31,14 +31,21 @@ LogController.login = async (req, res) => {
       return res.status(400).json({ message: 'Invalid password' });
     }
 
-    // Generate a token
-    const accessToken = generateToken(user);
+    // check if user is valid
+    const validUser = await user.valid;
+    if (validUser == false){
+      return res.status(400).json({ message: 'account still not approved' });
+    } else {
+      // Generate a token
+      const accessToken = generateToken(user);
 
-    res.cookie('Access Token', accessToken, {
+      res.cookie('Access Token', accessToken, {
       maxAge: 60 * 60 * 24 * 30 * 1000,
     });
 
     return res.status(200).json('Logged in successfully');
+
+    }
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: error.message });
