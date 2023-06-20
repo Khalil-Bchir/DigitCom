@@ -48,7 +48,8 @@ Before running the application, ensure that you have the following dependencies 
     "email": "john.doe@example.com",
     "password": "password123",
     "userType": "CON",
-    "file": [image file]
+    "file": [image file],
+    "valid": false,
   }
   ```
 
@@ -65,6 +66,7 @@ Before running the application, ensure that you have the following dependencies 
       "userId": "23CON001",
       "userType": "CON",
       "file": "1624314807047--profile.jpg",
+      "valid": false,
       "createdAt": "2023-06-21T12:20:38.074Z",
       "updatedAt": "2023-06-21T12:20:38.074Z",
       "__v": 0
@@ -81,6 +83,7 @@ Before running the application, ensure that you have the following dependencies 
 - `GET /api/user/:userId`: Get a user by ID.
 - `PUT /api/user/:userId`: Update a user.
 - `DELETE /api/user/:userId`: Delete a user.
+- `PUT /api/ApproveUser/:userId` : Approve user.
 - `POST /api/logIn`: Log in with email and password.
 - `POST /api/logOut`: Log out.
 
