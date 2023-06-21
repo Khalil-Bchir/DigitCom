@@ -33,6 +33,6 @@ router.get('/users',UserController.getAllUsers); // Get all users
 router.get('/user/:userId',UserController.getUserById); // Get user by userId 
 router.put('/user/:userId',upload.single('file'),UserController.updateUser); // Update a user 
 router.delete('/user/:userId',UserController.deleteUser); // Delete a user 
-router.put('/Approveuser/:userId',UserController.approveUser); // Approve User
+router.put('/ApproveUser/:userId',UserController.approveUser); // Approve User
 
 module.exports = router;
