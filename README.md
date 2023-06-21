@@ -13,9 +13,7 @@ Before running the application, ensure that you have the following dependencies 
 
 1. Clone the repository:
 
-   ```
   https://github.com/Khalil-Bchir/DigitCom.git
-   ```
 
 2. Install the required dependencies:
 
