@@ -79,7 +79,7 @@ Before running the application, ensure that you have the following dependencies 
 
   ```json
   {
-  "title": "Mathematics 101 updated",
+  "title": "Mathematics 101",
   "description": "Introduction to Mathematics",
   "startDate": "2023-07-01T09:00:00",
   "endDate": "2023-07-01T11:30:00"
@@ -90,7 +90,7 @@ Before running the application, ensure that you have the following dependencies 
 
   ```json
   {
-    "title": "Mathematics 101 updated",
+    "title": "Mathematics 101",
     "description": "Introduction to Mathematics",
     "startDate": "2023-07-01T08:00:00.000Z",
     "endDate": "2023-07-01T10:30:00.000Z",
