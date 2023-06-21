@@ -73,7 +73,33 @@ Before running the application, ensure that you have the following dependencies 
     }
   }
   ```
+### Course Creation example
 
+- **Endpoint:** POST `/api/Course`
+- **Description:** Creates a new course account.
+- **Request Body:**
+
+  ```json
+  {
+  "title": "Mathematics 101 updated",
+  "description": "Introduction to Mathematics",
+  "startDate": "2023-07-01T09:00:00",
+  "endDate": "2023-07-01T11:30:00"
+}
+  ```
+
+- **Response:**
+
+  ```json
+  {
+    "title": "Mathematics 101 updated",
+    "description": "Introduction to Mathematics",
+    "startDate": "2023-07-01T08:00:00.000Z",
+    "endDate": "2023-07-01T10:30:00.000Z",
+    "_id": "64936949586a123d38853f4d",
+    "__v": 0
+}
+  ```
 
 
 ## API Endpoints
@@ -86,6 +112,11 @@ Before running the application, ensure that you have the following dependencies 
 - `PUT /api/ApproveUser/:userId` : Approve user.
 - `POST /api/logIn`: Log in with email and password.
 - `POST /api/logOut`: Log out.
+- `POST /api/Course`: Create a new Course.
+- `GET /api/Course`: Get all courses.
+- `GET /api/Course/:id`: Get a course by Id.
+- `Put /api/Course/:id`: Updae a course.
+- `DELETE /api/Course/:id`: Delete a course.
 
 The API will be available at `http://localhost:3000/api`.
 ## File Uploads
