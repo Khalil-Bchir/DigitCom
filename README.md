@@ -92,7 +92,7 @@ The API supports file uploads for user profiles. When creating or updating a use
 
 The uploaded files are stored in the `uploads` directory.
 
-## Authenticatio
+## Authentication
 
 User authentication is implemented using JSON Web Tokens (JWT). When logging in, the API returns an access token that should be included in subsequent requests in the `Authorization` header as follows:
 
