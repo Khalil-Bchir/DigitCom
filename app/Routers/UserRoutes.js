@@ -24,15 +24,17 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) =>{
     cb(null, Date.now()+ '--' +file.originalname )
   }
-})
+});
 
 const upload = multer({ storage: storage });
 
 router.post('/user',upload.single('file'), UserController.createUser); // Create user 
 router.get('/users',UserController.getAllUsers); // Get all users 
 router.get('/user/:userId',UserController.getUserById); // Get user by userId 
+router.get('/user',UserController.groupByRole); // Get user by user type
 router.put('/user/:userId',upload.single('file'),UserController.updateUser); // Update a user 
 router.delete('/user/:userId',UserController.deleteUser); // Delete a user 
 router.put('/ApproveUser/:userId',UserController.approveUser); // Approve User
+router.put('/change-password/:userId',UserController.updatePassword); // update password 
 
 module.exports = router;

@@ -13,9 +13,7 @@ Before running the application, ensure that you have the following dependencies 
 
 1. Clone the repository:
 
-   ```
   https://github.com/Khalil-Bchir/DigitCom.git
-   ```
 
 2. Install the required dependencies:
 
@@ -73,7 +71,36 @@ Before running the application, ensure that you have the following dependencies 
     }
   }
   ```
+### Module Creation example
 
+- **Endpoint:** POST `/api/module`
+- **Description:** Creates a new module account.
+- **Request Body:**
+
+  ```json
+  {
+    "title": "Mecanique 101",
+    "nbrHeure": 32,
+    "duration": 1,
+    "price": 199.9,
+    "description": " intro "
+  }
+  ```
+
+- **Response:**
+
+  ```json
+  {
+    "moduleId": "M002",
+    "title": "mecanique101",
+    "nbrHeure": 32,
+    "duration": 1,
+    "price": 199.9,
+    "description": " intro ",
+    "_id": "649cc50d0cf1553a698720e4",
+    "__v": 0
+  }
+  ```
 
 
 ## API Endpoints
@@ -86,6 +113,11 @@ Before running the application, ensure that you have the following dependencies 
 - `PUT /api/ApproveUser/:userId` : Approve user.
 - `POST /api/logIn`: Log in with email and password.
 - `POST /api/logOut`: Log out.
+- `POST /api/module`: Create a new module.
+- `GET /api/module`: Get all modules.
+- `GET /api/module/:moduleid`: Get a module by Id.
+- `Put /api/module/:moduleid`: Updae a module.
+- `DELETE /api/module/:moduleid`: Delete a module.
 
 The API will be available at `http://localhost:3000/api`.
 ## File Uploads

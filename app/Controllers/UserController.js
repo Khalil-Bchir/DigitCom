@@ -1,21 +1,14 @@
 //UserController
 
 const User = require ('../Models/User');
+const Module = require ('../Models/Modules');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
 
+const { generateCustomId } = require('../../utils/UserId');
 
 const UserController = {};
-
-//generate userId
-function generateCustomId(year, type, index) {
-    const indexStr = index.toString().padStart(3, '0');
-    const customId = `${year}${type}${indexStr}`;
-    return customId;
-  };
-
 
 // Create user
 UserController.createUser = async (req, res) => {
@@ -39,6 +32,9 @@ UserController.createUser = async (req, res) => {
     // Generate a custom ID for the new user
     const customId = generateCustomId(year, req.body.userType, count + 1);
 
+    // Find the module by moduleId
+    const module = await Module.findOne({ moduleId: req.body.module });
+
     // Create a new user
     const { filename } = req.file;
     const newUser = new User({
@@ -46,6 +42,8 @@ UserController.createUser = async (req, res) => {
       lastname: req.body.lastname,
       email: req.body.email,
       password: hashedPassword,
+      phone: req.body.phone,
+      module: module.moduleId,
       userId: customId,
       userType: req.body.userType,
       file : filename,
@@ -81,6 +79,18 @@ UserController.getUserById = async (req, res) =>{
   }catch(error){
       console.log(error.message);
       res.status(500).json( {message: error.message});
+  }
+};
+
+//get user by Type
+UserController.groupByRole = async (req, res) => {
+  try {
+    const userType = req.body.userType;
+    const users = await User.find({ userType: userType });
+    res.status(200).json(users);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -137,9 +147,39 @@ UserController.updateUser = async (req, res) => {
   }
 };
 
+//update password 
+UserController.updatePassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword } = req.body;
+    
+    // Find the user by their userID
+    const userId = req.params.userId;
+    const user = await User.findOne({ userId: userId });
+
+    // Check if the provided old password matches the stored password
+    const passwordMatch = await bcrypt.compare(oldPassword, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ message: 'Incorrect old password' });
+    } else{
+
+      // Hash the new password
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      // Update the user's password
+      user.password = hashedPassword;
+      await user.save();
+
+      res.json({ message: 'Password changed successfully' });
+    
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // Delete user
-
 UserController.deleteUser = async (req, res) => {
   try {
     const userId = req.params.userId;
@@ -167,7 +207,6 @@ UserController.deleteUser = async (req, res) => {
 };
 
 //approve user
-
 UserController.approveUser = async (req,res)=>{
 try{
     const userId = req.params.userId;
@@ -179,5 +218,6 @@ try{
     console.log(error.message);
     res.status(500).json( {message: error.message});
   }
-}
+};
+
 module.exports = UserController;

@@ -43,6 +43,17 @@ const UserSchema = new mongoose.Schema(
             required: false
         }, 
 
+        phone:{
+            type: String,
+            required: true
+        },
+
+        module:{
+            type: String,
+            required: true,
+            ref: "Module"
+        },
+
         valid:{
             type: Boolean,
             required: true
